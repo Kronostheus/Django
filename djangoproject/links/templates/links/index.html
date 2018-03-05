@@ -4,7 +4,7 @@
 <ul class='center-align'>
     {% for link in links %}
     <li class='card-panel hoverable'>
-        <a href='{{link.url}}'>
+        <a href='{{link.get_absolute_url}}'>
             <b>{{link.title}}</b>
         </a>
     </li>
@@ -12,32 +12,13 @@
 </ul>
 
 <footer>
-    <!--
-    <div class='pagination'>
-        <span class='step-links'>
-            {% if links.has_previous %}
-                <a href='?page=1'>&laquo; first</a>
-                <a href='?page={{ links.previous_page_number }}'>previous</a>
-            {% endif %}
-            
-            <span class='current'>
-                Page {{ links.number }} of {{ links.paginator.num_pages }}.
-            </span>
-            
-            {% if links.has_next %}
-                <a href='?page={{ links.next_page_number }}'>next</a>
-                <a href='?page={{ links.paginator.num_pages }}'>last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
-    -->
     <ul class='pagination'>
         {% if links.has_previous %}
-            <li class='waves-effect btn-flat'>
-                <a href='?page={{ links.previous_page_number }}'>&laquo;</a>
+            <li class='waves-effect'>
+                <a href='?page={{ links.previous_page_number }}'><i class="material-icons">chevron_left</i></a>
             </li>
         {% else %}
-            <li class='disabled btn-flat'><span>&laquo;</span></li>
+            <li class='disabled'><span><i class="material-icons">chevron_left</i></span></li>
         {% endif %}
 
         {% for i in links.paginator.page_range %}
@@ -49,11 +30,11 @@
         {% endfor %}
 
         {% if links.has_next %}
-            <li class='waves-effect btn-flat'>
-                <a href='?page={{ links.next_page_number }}'>&raquo;</a>
+            <li class='waves-effect'>
+                <a href='?page={{ links.next_page_number }}'><i class="material-icons">chevron_right</i></a>
             </li>
         {% else %}
-            <li class='disabled btn-flat'><span>&raquo;</span></li>
+            <li class='disabled'><span><i class="material-icons">chevron_right</i></span></li>
         {% endif %}
     </ul>
 </footer>

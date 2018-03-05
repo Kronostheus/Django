@@ -15,14 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
+
 from django.urls import include, path
 
 from links import views as linkviews
+
+from links.views import LinkCreateView, LinkDetailView
 
 urlpatterns = [
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, name='logout'),
     path('signup/', linkviews.signup, name='signup'),
     path('admin/', admin.site.urls),
+    path('links/create/', login_required(LinkCreateView.as_view()), name='create'),
+    path('link/(?P<pk>\d+)/', LinkDetailView.as_view(), name='link_detail'),
     path('', include('links.urls'))
 ]

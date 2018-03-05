@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h2><a href='{{ object.url }}'>{{ object.title }}</a></h2>
+
+<div class="card-panel">
+    {{object.description}}
+</div>
+
+{% endblock %}

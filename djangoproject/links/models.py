@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 # Create your models here.
@@ -10,6 +11,9 @@ class Link(models.Model):
     rank = models.FloatField(default = 0.0)
     url = models.URLField("URL", max_length=250, blank=True)
     description = models.TextField(blank=True)
+
+    def get_absolute_url(self):
+        return reverse("link_detail", kwargs={"pk": str(self.id)})
 
     def __str__(self):
         return self.title
