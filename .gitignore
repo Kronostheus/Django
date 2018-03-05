@@ -52,7 +52,10 @@ coverage.xml
 
 # Django stuff:
 *.log
+.static_storage/
+.media/
 local_settings.py
+settings.py
 
 # Flask stuff:
 instance/
@@ -99,3 +102,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Virtual Code
+.vscode/
