@@ -2,11 +2,33 @@
 <head>
     <meta charset='UTF-8'>
     <meta name='viewpoint' content='width=device-width, initial-scale=1.0'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <title>Django Forum</title>
 </head>
 
 <body>
-    <a style='display:block' href="/admin">ADMIN</a>
+    <header>
+        <nav class="blue lighten-1" role="navigation">
+            <div class="nav-wrapper container">
+                <ul id="nav-mobile" class="sidenav">
+                    <li><a href="../login/">Login</a></li>
+                </ul>
+                <ul id="nav-mobile" class="sidenav">
+                    <li><a href="../logout/">Logout</a></li>
+                </ul>
+                <ul id="nav-mobile" class="sidenav right">
+                    <li>
+                        {% if user.is_authenticated %}
+                           {{user.get_username}}
+                        {% else %}
+                            Anonymous User
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
     <div class='container'>
         {% block content%}
         {% endblock%}
