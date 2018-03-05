@@ -11,7 +11,7 @@ class Link(models.Model):
     url = models.URLField("URL", max_length=250, blank=True)
     description = models.TextField(blank=True)
 
-    def __srt__(self):
+    def __str__(self):
         return self.title
 
 class Vote(models.Model):
