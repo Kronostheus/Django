@@ -2,12 +2,17 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Link, Vote
 
 # Create your views here.
 def index(request):
-    links = Link.objects.all()[:10]
+    linkList = Link.objects.all()
+    paginator = Paginator(linkList, 10)
+
+    page = request.GET.get('page')
+    links = paginator.get_page(page)
 
     context = {
         'links': links

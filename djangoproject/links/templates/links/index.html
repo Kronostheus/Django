@@ -1,13 +1,33 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<ol>
+<ul class='center-align'>
     {% for link in links %}
-    <li>
+    <li class='card-panel hoverable'>
         <a href="{{link.url}}">
             <b>{{link.title}}</b>
         </a>
     </li>
     {% endfor %}
-</ol>
+</ul>
+
+<footer>
+    <div class="pagination">
+        <span class="step-links">
+            {% if links.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ links.previous_page_number }}">previous</a>
+            {% endif %}
+            
+            <span class="current">
+                Page {{ links.number }} of {{ links.paginator.num_pages }}.
+            </span>
+            
+            {% if links.has_next %}
+                <a href="?page={{ links.next_page_number }}">next</a>
+                <a href="?page={{ links.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</footer>
 {% endblock %}
