@@ -10,32 +10,4 @@
     </li>
     {% endfor %}
 </ul>
-
-<footer>
-    <ul class='pagination'>
-        {% if links.has_previous %}
-            <li class='waves-effect'>
-                <a href='?page={{ links.previous_page_number }}'><i class="material-icons">chevron_left</i></a>
-            </li>
-        {% else %}
-            <li class='disabled'><span><i class="material-icons">chevron_left</i></span></li>
-        {% endif %}
-
-        {% for i in links.paginator.page_range %}
-            {% if links.number == i %}
-                <li class='active waves-effect btn blue lighten-1'><span>{{ i }}</span></li>
-            {% else %}
-                <li  class='waves-effect btn-flat'><a href='?page={{ i }}'>{{ i }}</a></li>
-            {% endif %}
-        {% endfor %}
-
-        {% if links.has_next %}
-            <li class='waves-effect'>
-                <a href='?page={{ links.next_page_number }}'><i class="material-icons">chevron_right</i></a>
-            </li>
-        {% else %}
-            <li class='disabled'><span><i class="material-icons">chevron_right</i></span></li>
-        {% endif %}
-    </ul>
-</footer>
 {% endblock %}

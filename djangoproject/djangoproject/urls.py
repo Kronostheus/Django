@@ -21,7 +21,7 @@ from django.urls import include, path
 
 from links import views as linkviews
 
-from links.views import LinkCreateView, LinkDetailView
+from links.views import LinkCreateView, LinkDetailView, LinkUpdateView, LinkDeleteView
 
 urlpatterns = [
     path('login/', auth_views.login, name='login'),
@@ -30,5 +30,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('links/create/', login_required(LinkCreateView.as_view()), name='create'),
     path('link/(?P<pk>\d+)/', LinkDetailView.as_view(), name='link_detail'),
+    path('links/delete/(?P<pk>\d+)', login_required(LinkDeleteView.as_view()), name='link_delete'),
+    path('links/update/(?P<pk>\d+)/', login_required(LinkUpdateView.as_view()), name='link_update'),
     path('', include('links.urls'))
 ]

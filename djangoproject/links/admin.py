@@ -12,3 +12,4 @@ class VoteAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Vote, VoteAdmin)
+

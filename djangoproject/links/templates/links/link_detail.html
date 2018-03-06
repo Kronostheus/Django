@@ -2,10 +2,22 @@
 
 {% block content %}
 
-<h2><a href='{{ object.url }}'>{{ object.title }}</a></h2>
+<h2>{{ object.title }}</h2>
+<h5><a href='{{ object.url }}'>{{object.url}}</a></h5>
+<p>Submitted by: {{object.submitter}}</p>
+{% if object.submitter == user %}
+<div class="fixed-action-btn vertical click-to-toggle left">
+    <a class="btn-floating btn-large yellow darken-2">
+        <i class="large material-icons">build</i>
+    </a>
+    <ul>
+        <li><a class="btn-floating blue darken-1" href="{% url 'link_update' pk=object.pk %}"><i class="material-icons">mode_edit</i></a></li>
+        <li><a class="btn-floating red" href="{% url 'link_delete' pk=object.pk %}"><i class="material-icons">delete</i></a></li>
+    </ul>
+</div>
+{% endif %}
 
 <div class="card-panel">
-    {{object.description}}
+        {{object.description}}
 </div>
-
 {% endblock %}

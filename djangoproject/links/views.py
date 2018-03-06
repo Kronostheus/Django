@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+
+from django.urls import reverse_lazy
 
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -25,6 +27,11 @@ def index(request):
     }
 
     return render(request, 'links/index.html', context)
+
+def link_delete(request):
+    link = Link.objects.get(pk)
+    link.delete()
+ 
 
 def signup(request):
     if request.method == 'POST':
@@ -53,3 +60,11 @@ class LinkCreateView(CreateView):
 
 class LinkDetailView(DetailView):
     model = Link
+
+class LinkUpdateView(UpdateView):
+    model = Link
+    form_class = LinkForm
+
+class LinkDeleteView(DeleteView):
+    model = Link
+    success_url = reverse_lazy('home')
