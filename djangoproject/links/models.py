@@ -24,3 +24,13 @@ class Vote(models.Model):
 
     def __str__(self):
         return "%s upvoted %s" % (self.voter.username, self.link.title)
+
+class Comment(models.Model):
+    link = models.ForeignKey(Link, on_delete=models.CASCADE, related_name='comments')
+    submitter = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.text
+

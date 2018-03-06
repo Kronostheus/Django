@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Comment</h2>
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class='waves-effect waves-light btn blue lighten-1'>Comment</button>
+</form>
+{% endblock %}

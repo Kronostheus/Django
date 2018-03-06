@@ -20,4 +20,20 @@
 <div class="card-panel">
         {{object.description}}
 </div>
+
+{% if user.is_authenticated %}
+    <a class="btn btn-floating yellow darken-1" href="{% url 'link_comment' pk=object.pk %}"><i class="material-icons">comment</i></a>
+{% else %}
+    <h5>You must be logged in to comment</h5>
+{% endif %}
+
+{% for comment in object.comments.all %}
+    <div class='card-panel'>
+        <p>{{comment.submitter}} on {{comment.date}}</p>
+        <p>{{comment.text}}</p>
+    </div>
+{% empty %}
+    <p>No comments yet</p>
+{% endfor %}
+
 {% endblock %}

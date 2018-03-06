@@ -32,5 +32,6 @@ urlpatterns = [
     path('link/(?P<pk>\d+)/', LinkDetailView.as_view(), name='link_detail'),
     path('links/delete/(?P<pk>\d+)', login_required(LinkDeleteView.as_view()), name='link_delete'),
     path('links/update/(?P<pk>\d+)/', login_required(LinkUpdateView.as_view()), name='link_update'),
+    path('comment/(?P<pk>\d+)', linkviews.link_comment, name='link_comment'),
     path('', include('links.urls'))
 ]
