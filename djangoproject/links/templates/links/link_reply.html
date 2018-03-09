@@ -1,7 +1,9 @@
 <div class='card-panel'>
     <p>{{comment.submitter}} on {{comment.date}}</p>
     <p>{{comment.text}}</p>
-    <a href="{% url 'reply_comment' pk=comment.pk %}">reply</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'reply_comment' pk=comment.pk %}">reply</a>
+    {% endif %}
     {% if comment.children %}
             {% for comment in comment.children.all %}
                 {% include 'links/link_reply.html' %}
