@@ -47,6 +47,22 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
+def reply_comment(request, pk):
+    parent = get_object_or_404(Comment, pk=pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.parent = parent
+            comment.link = parent.link
+            comment.submitter = request.user
+            comment.save()
+            return redirect('link_detail', pk=parent.link.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'links/link_comment.html', {'form': form})
+
+
 def link_comment(request, pk):
     link = get_object_or_404(Link, pk=pk)
     if request.method == 'POST':

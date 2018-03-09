@@ -27,11 +27,8 @@
     <h5>You must be logged in to comment</h5>
 {% endif %}
 
-{% for comment in object.comments.all %}
-    <div class='card-panel'>
-        <p>{{comment.submitter}} on {{comment.date}}</p>
-        <p>{{comment.text}}</p>
-    </div>
+{% for comment in object.get_parent %}
+    {%include 'links/link_reply.html'%}
 {% empty %}
     <p>No comments yet</p>
 {% endfor %}

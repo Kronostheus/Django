@@ -12,6 +12,9 @@ class Link(models.Model):
     url = models.URLField("URL", max_length=250, blank=True)
     description = models.TextField(blank=True)
 
+    def get_parent(self):
+        return self.comments.filter(parent__isnull=True)
+
     def get_absolute_url(self):
         return reverse("link_detail", kwargs={"pk": str(self.id)})
 
@@ -28,6 +31,7 @@ class Vote(models.Model):
 class Comment(models.Model):
     link = models.ForeignKey(Link, on_delete=models.CASCADE, related_name='comments')
     submitter = models.ForeignKey(User, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='children', null=True)
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
 
