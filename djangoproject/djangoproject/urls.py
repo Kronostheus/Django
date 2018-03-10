@@ -29,10 +29,10 @@ urlpatterns = [
     path('signup/', linkviews.signup, name='signup'),
     path('admin/', admin.site.urls),
     path('links/create/', login_required(linkviews.link_create), name='link_create'),
-    path('link/(?P<pk>\d+)/', LinkDetailView.as_view(), name='link_detail'),
-    path('links/delete/(?P<pk>\d+)', login_required(LinkDeleteView.as_view()), name='link_delete'),
-    path('links/update/(?P<pk>\d+)/', login_required(LinkUpdateView.as_view()), name='link_update'),
-    path('comment/(?P<pk>\d+)', linkviews.link_comment, name='link_comment'),
-    path('reply/(?P<pk>\d+)', linkviews.reply_comment, name='reply_comment'),
+    path('link/(P<pk>\d+)/', LinkDetailView.as_view(), name='link_detail'),
+    path('links/delete/(P<pk>\d+)', login_required(LinkDeleteView.as_view()), name='link_delete'),
+    path('links/update/(P<pk>\d+)/', login_required(LinkUpdateView.as_view()), name='link_update'),
+    path('comment/(P<pk>\d+)', linkviews.link_comment, name='link_comment'),
+    path('reply/(P<pk>\d+)', linkviews.reply_comment, name='reply_comment'),
     path('', include('links.urls'))
 ]
