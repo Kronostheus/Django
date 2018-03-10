@@ -3,11 +3,17 @@
 {% block content %}
 <ul class='center-align'>
     {% for link in links %}
-    <li class='card-panel hoverable'>
-        <a href='{{link.get_absolute_url}}'>
-            <b>{{link.title}}</b> [{{link.comments.count}} comments]
-        </a>
-    </li>
+    <form method='POST' action="{% url 'vote' %}" class='vote_form'>
+        <li class='card-panel hoverable'>
+            {% csrf_token %}
+            <input type='hidden' id='id_link' name='link' value='{{link.pk}}'/>
+            <input type='hidden' id='id_voter' name='voter' value='{{user.pk}}'/>
+            <button class="btn-floating green accent-4 left"><i class="material-icons">arrow_upward</i></button>
+            <a href='{{link.get_absolute_url}}'>
+                <b>{{link.title}}</b> [{{link.comments.count}} comments]
+            </a>
+        </li>
+    </form>
     {% endfor %}
 </ul>
 {% endblock %}

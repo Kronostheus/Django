@@ -12,11 +12,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Link, Vote, Comment
 
-from .forms import LinkForm, CommentForm
+from .forms import LinkForm, CommentForm, VoteForm
 
 # Create your views here.
 def index(request):
-    linkList = Link.objects.all()
+    linkList = Link.objects.all().order_by('-vote')
     paginator = Paginator(linkList, 10)
 
     page = request.GET.get('page')
@@ -90,6 +90,17 @@ def link_create(request):
     else:
         form = LinkForm()
     return render(request, 'links/link_form.html', {'form': form})
+
+def updoot(request):
+    form = VoteForm(request.POST) 
+    link = get_object_or_404(Link, pk=form.data["link"])
+    user = request.user
+    has_voted = Vote.objects.filter(voter=user, link=link)
+    if has_voted.count() == 0:
+        Vote.objects.create(voter=user, link=link)
+    else:
+        has_voted[0].delete()
+    return redirect('home')
 
 class LinkDetailView(DetailView):
     model = Link

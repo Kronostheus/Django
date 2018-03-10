@@ -8,10 +8,10 @@ class Link(models.Model):
     title = models.CharField("Headline", max_length=100)
     submitter = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
-    rank = models.FloatField(default = 0.0)
+    rank = models.IntegerField(default = 0)
     url = models.URLField("URL", max_length=250, blank=True)
     description = models.TextField(blank=True)
-
+    
     def get_parent(self):
         return self.comments.filter(parent__isnull=True)
 
