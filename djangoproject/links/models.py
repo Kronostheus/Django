@@ -11,10 +11,12 @@ class Link(models.Model):
     rank = models.IntegerField(default = 0)
     url = models.URLField("URL", max_length=250, blank=True)
     description = models.TextField(blank=True)
-    
+
+    # Get top level comment
     def get_parent(self):
         return self.comments.filter(parent__isnull=True)
 
+    # URL to Link Page
     def get_absolute_url(self):
         return reverse("link_detail", kwargs={"pk": str(self.id)})
 

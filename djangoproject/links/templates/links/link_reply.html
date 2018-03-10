@@ -1,10 +1,16 @@
+<!--This gets called to show threaded comments/replies-->
 <div class='card-panel'>
     <p>{{comment.submitter}} on {{comment.date}}</p>
     <p>{{comment.text}}</p>
+
+    <!--Signed In users can reply-->
     {% if user.is_authenticated %}
         <a href="{% url 'reply_comment' pk=comment.pk %}">reply</a>
     {% endif %}
+
+    <!--Replies (if existant)-->
     {% if comment.children %}
+            <!--Recursively call this html to showcase all replies-->
             {% for comment in comment.children.all %}
                 {% include 'links/link_reply.html' %}
             {% endfor %}

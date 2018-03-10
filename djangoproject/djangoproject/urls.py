@@ -22,7 +22,8 @@ from django.urls import include, path
 from links import views as linkviews
 
 from links.views import  LinkDetailView, LinkUpdateView, LinkDeleteView
- 
+
+# (P<pk>\d+) used to get primary key of link 
 urlpatterns = [
     path('login/', auth_views.login, name='login'),
     path('logout/', auth_views.logout, name='logout'),

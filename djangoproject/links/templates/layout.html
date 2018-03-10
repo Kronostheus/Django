@@ -2,16 +2,21 @@
 <head>
     <meta charset='UTF-8'>
     <meta name='viewpoint' content='width=device-width, initial-scale=1.0'>
+    <!--Materialize CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!--Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <title>KronoPost</title>
 
+    <!--jQuery and Materialize CSS functions-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
 </head>
 
 <body>
     <header>
+        <!--Navigation Bar-->
         <nav class="blue lighten-1" role="navigation">
             <div class="nav-wrapper container">
                 <ul id="nav-mobile" class="sidenav">
@@ -30,9 +35,11 @@
                 
                 <ul id="nav-mobile" class="sidenav right">
                     <li>
+                        <!--Signed In users have their name displayed and can create posts-->
                         {% if user.is_authenticated %}
                             {{user.get_username}}
                             <ul id="nav-mobile" class="sidenav right">
+                                <!--Create Post-->
                                 <li><a class="btn btn-floating blue pulse" href="{% url 'link_create' %}"><i class="material-icons">edit</i></a></li>
                             </ul>
                         {% else %}
@@ -45,17 +52,20 @@
     </header>
 
     <div class='container'>
+        <!--Templates get loaded here-->
         {% block content%}
         {% endblock%}
     </div>
     <footer>
             <ul class='pagination'>
+                <!--Creates icon if there are previous pages-->
                 {% if links.has_previous %}
                     <li class='waves-effect'>
                         <a href='?page={{ links.previous_page_number }}'><i class="material-icons">chevron_left</i></a>
                     </li>
                 {% endif %}
         
+                <!--Pagination-->
                 {% for i in links.paginator.page_range %}
                     {% if links.number == i %}
                         <li class='active waves-effect btn blue lighten-1'><span>{{ i }}</span></li>
@@ -63,7 +73,8 @@
                         <li  class='waves-effect btn-flat'><a href='?page={{ i }}'>{{ i }}</a></li>
                     {% endif %}
                 {% endfor %}
-        
+                
+                <!--Creates icon if there are more pages-->
                 {% if links.has_next %}
                     <li class='waves-effect'>
                         <a href='?page={{ links.next_page_number }}'><i class="material-icons">chevron_right</i></a>

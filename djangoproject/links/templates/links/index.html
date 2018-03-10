@@ -3,6 +3,7 @@
 {% block content %}
 <ul class='center-align'>
     {% for link in links %}
+    <!-- Form used to make updoot button-->
     <form method='POST' action="{% url 'vote' %}" class='vote_form'>
         <li class='card-panel hoverable'>
             {% csrf_token %}

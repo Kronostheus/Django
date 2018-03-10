@@ -1,32 +1,40 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
+<!--Link Header-->
 <h2>{{ object.title }}</h2>
+<!--Link URL-->
 <h5><a href='{{ object.url }}'>{{object.url}}</a></h5>
+<!--Link Original Poster-->
 <p>Submitted by: {{object.submitter}}</p>
+
+<!--Link Options (OP only)-->
 {% if object.submitter == user %}
 <div class="fixed-action-btn vertical click-to-toggle left">
     <a class="btn-floating btn-large yellow darken-2">
         <i class="large material-icons">build</i>
     </a>
     <ul>
+        <!--Link Edit-->
         <li><a class="btn-floating blue darken-1" href="{% url 'link_update' pk=object.pk %}"><i class="material-icons">mode_edit</i></a></li>
+        <!--Link Delete-->
         <li><a class="btn-floating red" href="{% url 'link_delete' pk=object.pk %}"><i class="material-icons">delete</i></a></li>
     </ul>
 </div>
 {% endif %}
-
+<!--Link Description-->
 <div class="card-panel">
         {{object.description}}
 </div>
 
+<!--Comment Button-->
 {% if user.is_authenticated %}
     <a class="btn btn-floating yellow darken-1" href="{% url 'link_comment' pk=object.pk %}"><i class="material-icons">comment</i></a>
 {% else %}
     <h5>You must be logged in to comment</h5>
 {% endif %}
 
+<!--Comments-->
 {% for comment in object.get_parent %}
     {%include 'links/link_reply.html'%}
 {% empty %}
