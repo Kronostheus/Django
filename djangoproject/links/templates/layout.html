@@ -33,7 +33,7 @@
                         {% if user.is_authenticated %}
                             {{user.get_username}}
                             <ul id="nav-mobile" class="sidenav right">
-                                <li><a class="btn btn-floating blue pulse" href="{% url 'create' %}"><i class="material-icons">edit</i></a></li>
+                                <li><a class="btn btn-floating blue pulse" href="{% url 'link_create' %}"><i class="material-icons">edit</i></a></li>
                             </ul>
                         {% else %}
                             Anonymous User

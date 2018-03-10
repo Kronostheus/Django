@@ -78,16 +78,18 @@ def link_comment(request, pk):
     return render(request, 'links/link_comment.html', {'form': form})
 
 
-class LinkCreateView(CreateView):
-    model = Link
-    form_class = LinkForm
-
-    def form_valid(self, form):
-        f = form.save(commit=False)
-        f.rank_score = 0.0
-        f.submitter = self.request.user
-        f.save()
-        return super(LinkCreateView, self).form_valid(form)
+def link_create(request):
+    if request.method == 'POST':
+        form = LinkForm(request.POST)
+        if form.is_valid():
+            link = form.save(commit=False)
+            link.rank_score = 0.0
+            link.submitter = request.user
+            link.save()
+            return redirect('link_detail', pk=link.id)
+    else:
+        form = LinkForm()
+    return render(request, 'links/link_form.html', {'form': form})
 
 class LinkDetailView(DetailView):
     model = Link
