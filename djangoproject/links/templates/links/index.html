@@ -5,7 +5,7 @@
     {% for link in links %}
     <li class='card-panel hoverable'>
         <a href='{{link.get_absolute_url}}'>
-            <b>{{link.title}}</b>
+            <b>{{link.title}}</b> [{{link.comments.count}} comments]
         </a>
     </li>
     {% endfor %}
