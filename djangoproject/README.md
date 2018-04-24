@@ -8,8 +8,8 @@ An attempt at creating a reddit like website using Django framework
 - [XAMPP] (https://www.apachefriends.org/)
 
 ## Motivation
-Decided to learn Django Framework by completing a project. Wanted to created something other than a blog (90% of tutorials out there).
-I wrote code as I learned about the framework and searched online for help when stuck and by no means represents the best coding standards out there.
+Decided to learn Django Framework by completing a project. Wanted to create something other than a blog (90% of tutorials out there).
+I wrote code as I learned about the framework.
 However, I did make an effort of keeping the code clean and simple, as well as trying to at least follow some of those standards.
 
 ## Features
